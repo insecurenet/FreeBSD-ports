@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE packagegui SYSTEM "./schema/packages.dtd">
+<?xml-stylesheet type="text/xsl" href="./xsl/package.xsl"?>
+<packagegui>
+	<copyright>
+	<![CDATA[
+/*
+ * iperfserver.xml
+ *
+ * part of pfSense (https://www.pfsense.org)
+ * Copyright (c) 2015-2020 Rubicon Communications, LLC (Netgate)
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+	]]>
+	</copyright>
+	<name>iperfserver</name>
+	<title>iperf: Server</title>
+	<savetext>Run iperf server</savetext>
+	<saveicon>fa-play-circle</saveicon>
+	<savebtnclass>btn-success</savebtnclass>
+	<preoutput>yes</preoutput>
+	<donotsave>true</donotsave>
+	<tabs>
+		<tab>
+			<text>Client</text>
+			<url>/pkg_edit.php?xml=iperf.xml</url>
+		</tab>
+		<tab>
+			<text>Server</text>
+			<url>/pkg_edit.php?xml=iperfserver.xml</url>
+			<active/>
+		</tab>
+	</tabs>
+	<fields>
+		<field>
+			<fielddescr>Port</fielddescr>
+			<fieldname>port</fieldname>
+			<description>
+				<![CDATA[
+					Enter the port that iperf will bind to listen for client connections. (Default is 5001.)<br/>
+					iperf3 binds to TCP by default, but if the client requests UDP, it will bind to the same port on UDP as well during the test.
+				]]>
+			</description>
+			<type>input</type>
+		</field>
+		<field>
+			<fielddescr>Output format</fielddescr>
+			<fieldname>format</fieldname>
+			<description>Choose to display output in bits/sec or bytes/sec. (Default is bits.)</description>
+			<type>select</type>
+			<options>
+				<option>
+					<name>bits/sec</name>
+					<value>bits</value>
+				</option>
+				<option>
+					<name>bytes/sec</name>
+					<value>bytes</value>
+				</option>
+			</options>
+		</field>
+		<field>
+			<fielddescr>Interval</fielddescr>
+			<fieldname>interval</fieldname>
+			<description>Enter the desired interval between bandwidth, jitter and loss reports here. (Default is 0 for no periodic reports.)</description>
+			<type>input</type>
+		</field>
+		<field>
+			<fielddescr>Other Options</fielddescr>
+			<fieldname>info</fieldname>
+			<description>
+				iperf3 automatically sets most parameters dynamically based upon what clients request.
+				Previously available server options are no longer necessary.
+			</description>
+			<type>info</type>
+		</field>
+	</fields>
+	<custom_add_php_command>
+	<![CDATA[
+		mwexec("/usr/bin/killall iperf3");
+		$iperf_options = "";
+		if ($_POST['format'] == "bytes") {
+			$iperf_options .= " -f M";
+		}
+		if ($_POST['interval'] != "") {
+			$iperf_options .= " -i " . escapeshellarg($_POST['interval']);
+		}
+		if ($_POST['port'] != "") {
+			$iperf_options .= " -p " . escapeshellarg($_POST['port']);
+		}
+		$iperf_options .= " -s";
+		mwexec_bg("/usr/local/bin/iperf3" . $iperf_options);
+		echo '<br /><br /><button class="btn btn-info" type="button" value="' . gettext("Back to iperf server") . '" onclick="history.back()"><i class="fa fa-undo icon-embed-btn"></i> ' . gettext("Back to iperf server") . '</button>';
+	]]>
+	</custom_add_php_command>
+</packagegui>

@@ -1,0 +1,9 @@
+TIMESTAMP = 1526995053
+SHA256 (tsenart-vegeta-v7.0.0_GH0.tar.gz) = b9e2ae43b832849c46e9aa0e1cddf5938e79b9addad01481b3cbfb7aa09a03cb
+SIZE (tsenart-vegeta-v7.0.0_GH0.tar.gz) = 113427
+SHA256 (streadway-quantile-b0c5887_GH0.tar.gz) = f9d29902009510bcd68638fbdd6942f04c1b3def7c1efee730601fed8fdbd0ae
+SIZE (streadway-quantile-b0c5887_GH0.tar.gz) = 4862
+SHA256 (golang-net-ab54850_GH0.tar.gz) = fdb82ce54054f5f2eafb41156b8445b9bedefd581817b7395dc392bfcf6c876c
+SIZE (golang-net-ab54850_GH0.tar.gz) = 912099
+SHA256 (golang-text-c4d099d_GH0.tar.gz) = b73bfa5e48c59cde4b3bc54cfd83ef8d0024dfcac4eb471e55fce5ea71801a1c
+SIZE (golang-text-c4d099d_GH0.tar.gz) = 6032418
