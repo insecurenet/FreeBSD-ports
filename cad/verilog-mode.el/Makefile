@@ -1,0 +1,33 @@
+# Created by: stas
+# $FreeBSD$
+
+PORTNAME=	verilog-mode.el
+PORTVERSION=	801
+PORTREVISION=	7
+CATEGORIES=	cad elisp
+MASTER_SITES=	http://www.veripool.org/ftp/
+PKGNAMESUFFIX=	${EMACS_PKGNAMESUFFIX}
+DISTNAME=	${PORTNAME:R}-${PORTVERSION}.${PORTNAME:E}
+EXTRACT_SUFX=	.gz
+
+MAINTAINER=	ports@FreeBSD.org
+COMMENT=	Emacs lisp modules for the Verilog language
+
+LICENSE=	GPLv3+
+
+EXTRACT_CMD=	${GZCAT}
+EXTRACT_BEFORE_ARGS=	#
+EXTRACT_AFTER_ARGS=	> ${PORTNAME}
+
+NO_WRKSUBDIR=	yes
+NO_BUILD=	yes
+
+USES=		emacs:run
+
+PLIST_FILES=	${EMACS_SITE_LISPDIR}/${PORTNAME}
+
+do-install:
+	@${MKDIR} ${STAGEDIR}${PREFIX}/${EMACS_SITE_LISPDIR}
+	${INSTALL_DATA} ${WRKSRC}/${PORTNAME} ${STAGEDIR}${PREFIX}/${EMACS_SITE_LISPDIR}
+
+.include <bsd.port.mk>
