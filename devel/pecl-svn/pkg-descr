@@ -1,0 +1,4 @@
+PHP bindings to the libsvn library which provide access to subversion
+repositories.
+
+WWW: https://pecl.php.net/package/svn

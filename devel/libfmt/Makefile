@@ -1,0 +1,28 @@
+# $FreeBSD$
+
+PORTNAME=	libfmt
+DISTVERSION=	4.1.0
+CATEGORIES=	devel
+
+MAINTAINER=	SlavaMikerov@gmail.com
+COMMENT=	Fmt is an open-source formatting library for C++
+
+LICENSE=	BSD2CLAUSE
+LICENSE_FILE=	${WRKSRC}/LICENSE.rst
+
+USES=		cmake:outsource compiler:c++11-lib
+USE_GITHUB=	yes
+GH_ACCOUNT=	fmtlib
+GH_PROJECT=	fmt
+USE_LDCONFIG=	yes
+CMAKE_ARGS=	-DFMT_DOC:BOOL=OFF -DFMT_TEST:BOOL=OFF -DBUILD_SHARED_LIBS:BOOL=ON
+
+PLIST_SUB=	SHL3=${PORTVERSION} SHL1=${PORTVERSION:R:R}
+
+do-test:
+	@cd ${BUILD_WRKSRC} && \
+		${SETENV} ${CONFIGURE_ENV} ${CMAKE_BIN} ${CMAKE_ARGS} -DFMT_TEST:BOOL=ON ${CMAKE_SOURCE_PATH} && \
+		${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} ${ALL_TARGET} && \
+		${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} test
+
+.include <bsd.port.mk>

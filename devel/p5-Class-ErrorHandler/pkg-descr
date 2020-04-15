@@ -1,0 +1,5 @@
+Class::ErrorHandler provides an error-handling mechanism that's
+generic enough to be used as the base class for a variety of OO
+classes.
+
+WWW: https://metacpan.org/release/Class-ErrorHandler

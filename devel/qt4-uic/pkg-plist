@@ -1,0 +1,2 @@
+%%QT_BINDIR%%/uic
+%%DEBUG%%%%QT_BINDIR%%/uic.debug

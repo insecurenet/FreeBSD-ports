@@ -1,0 +1,4 @@
+bin/bear
+lib/bear/libear.so
+man/man1/bear.1.gz
+%%PORTDOCS%%%%DOCSDIR%%/README.md

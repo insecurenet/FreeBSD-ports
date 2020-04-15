@@ -1,0 +1,4 @@
+DBIx::TransactionManager is a simple transaction manager.  Like
+DBIx::Class::Storage::TxnScopeGuard.
+
+WWW: https://metacpan.org/release/DBIx-TransactionManager

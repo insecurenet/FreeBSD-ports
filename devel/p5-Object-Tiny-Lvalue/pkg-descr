@@ -1,0 +1,4 @@
+This is a clone of Object::Tiny, but adjusted to create accessors that
+return lvalues.
+
+WWW: https://metacpan.org/release/Object-Tiny-Lvalue

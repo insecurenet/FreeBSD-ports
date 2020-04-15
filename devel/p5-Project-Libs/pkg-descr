@@ -1,0 +1,4 @@
+Project::Libs automatically adds directories that may contain modules
+which a project depends on.
+
+WWW: https://metacpan.org/release/Project-Libs

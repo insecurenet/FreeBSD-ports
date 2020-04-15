@@ -1,0 +1,27 @@
+# $FreeBSD$
+
+PORTNAME=	pyvisa-py
+PORTVERSION=	0.2
+CATEGORIES=	devel python
+MASTER_SITES=	CHEESESHOP
+PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
+DISTNAME=	PyVISA-py-${PORTVERSION}
+
+MAINTAINER=	sunpoet@FreeBSD.org
+COMMENT=	PyVISA backend in pure Python
+
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE
+
+USES=		python
+USE_PYTHON=	autoplist concurrent distutils
+NO_ARCH=	yes
+
+OPTIONS_DEFINE=	SERIAL USB
+SERIAL_DESC=	Access to devices via RS-232
+USB_DESC=	Access to devices via USB
+
+SERIAL_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}serial>=0:comms/py-serial@${PY_FLAVOR}
+USB_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}usb>=0:devel/py-usb@${PY_FLAVOR}
+
+.include <bsd.port.mk>

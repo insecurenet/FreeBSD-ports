@@ -1,0 +1,4 @@
+Regexp::Assemble::Compressed is a subclass of Regexp::Assemble.  It
+assembles more compressed regular expressions.
+
+WWW: https://metacpan.org/release/Regexp-Assemble-Compressed

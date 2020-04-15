@@ -1,0 +1,3 @@
+Fast base16 (hex) encoding and decoding for ByteStrings.
+
+WWW: https://github.com/bos/base16-bytestring

@@ -1,0 +1,7 @@
+bin/repmgr
+bin/repmgrd
+lib/postgresql/repmgr.so
+share/postgresql/extension/repmgr--4.0.sql
+share/postgresql/extension/repmgr--unpackaged--4.0.sql
+share/postgresql/extension/repmgr.control
+@sample etc/repmgr.conf.sample

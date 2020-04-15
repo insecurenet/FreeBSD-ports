@@ -1,0 +1,7 @@
+MsgPuck is a compact and efficient MessagePack serialization library:
+- Zero-cost abstractions and zero overhead
+- Clean and readable C code ready to use
+- Easy to incorporate into your project
+- Fully documented and covered by unit tests
+
+WWW: https://github.com/tarantool/msgpuck

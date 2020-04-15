@@ -1,0 +1,6 @@
+Exception::Handler
+
+Exception::Handler helps to report exceptions with formatted text
+call-stack.
+
+WWW: https://metacpan.org/release/Exception-Handler

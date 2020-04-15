@@ -1,0 +1,3 @@
+This module exposes the perl interpreter's PL_compiling variable to perl.
+
+WWW: https://metacpan.org/release/B-Compiling

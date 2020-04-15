@@ -1,0 +1,4 @@
+PgSphere provides spherical data types, functions, operators, and indexing for
+PostgreSQL.
+
+WWW: https://pgsphere.github.io/

@@ -1,0 +1,34 @@
+# Created by: loïc bartoletti <lbartoletti@tuxfamily.org>
+# $FreeBSD$
+
+PORTNAME=	sqlitebrowser
+PORTVERSION=	3.10.1
+PORTREVISION=	2
+DISTVERSIONPREFIX=	v
+CATEGORIES=	databases
+
+MAINTAINER=	lbartoletti@tuxfamily.org
+COMMENT=	Visual tool to manage SQLite databases
+
+LICENSE=	MPL20 GPLv3
+LICENSE_COMB=	dual
+LICENSE_FILE=	${WRKSRC}/LICENSE
+
+BUILD_DEPENDS=	${LOCALBASE}/lib/libantlr.a:devel/antlr
+LIB_DEPENDS=	libqscintilla2_qt5.so:devel/qscintilla2-qt5
+
+USES=		cmake desktop-file-utils qt:5 sqlite
+CMAKE_ARGS+=	-DQT_INCLUDE_DIR=${QT_INCDIR} -DQT_LIBRARY_DIR=${QT_LIBDIR}
+USE_QT=		core gui network printsupport testlib widgets \
+		buildtools_build linguisttools_build qmake_build
+USE_GITHUB=	yes
+
+INSTALLS_ICONS=	yes
+
+post-patch:
+	@${REINPLACE_CMD} -e 's|%%DATADIR%%|${DATADIR}|' \
+		${WRKSRC}/src/PreferencesDialog.cpp
+	@${REINPLACE_CMD} -e 's|%%DATADIR%%|${DATADIR}|' \
+		${WRKSRC}/src/Application.cpp
+
+.include <bsd.port.mk>

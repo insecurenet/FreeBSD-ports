@@ -1,0 +1,46 @@
+--- Makefile.orig	2018-06-21 17:18:50 UTC
++++ Makefile
+@@ -518,16 +518,16 @@ ARFLAGS = rcs
+ 
+ prefix = $(HOME)
+ bindir = $(prefix)/bin
+-mandir = $(prefix)/share/man
+-infodir = $(prefix)/share/info
++mandir = $(prefix)/man
++infodir = $(prefix)/info
+ gitexecdir = libexec/git-core
+ mergetoolsdir = $(gitexecdir)/mergetools
+ sharedir = $(prefix)/share
+-gitwebdir = $(sharedir)/gitweb
+-perllibdir = $(sharedir)/perl5
++gitwebdir = $(sharedir)/examples/git/gitweb
++perllibdir = %%SITE_PERL%%
+ localedir = $(sharedir)/locale
+ template_dir = share/git-core/templates
+-htmldir = $(prefix)/share/doc/git-doc
++htmldir = $(prefix)/share/doc/git
+ ETC_GITCONFIG = $(sysconfdir)/gitconfig
+ ETC_GITATTRIBUTES = $(sysconfdir)/gitattributes
+ lib = lib
+@@ -1326,9 +1326,9 @@ EXTLIBS += -lz
+ 
+ ifndef NO_OPENSSL
+ 	OPENSSL_LIBSSL = -lssl
+-	ifdef OPENSSLDIR
+-		BASIC_CFLAGS += -I$(OPENSSLDIR)/include
+-		OPENSSL_LINK = -L$(OPENSSLDIR)/$(lib) $(CC_LD_DYNPATH)$(OPENSSLDIR)/$(lib)
++	ifdef OPENSSLBASE
++		BASIC_CFLAGS += -I$(OPENSSLBASE)/include
++		OPENSSL_LINK = -L$(OPENSSLBASE)/$(lib) $(CC_LD_DYNPATH)$(OPENSSLBASE)/$(lib)
+ 	else
+ 		OPENSSL_LINK =
+ 	endif
+@@ -2151,7 +2151,7 @@ git-instaweb: git-instaweb.sh GIT-SCRIPT-DEFINES
+ 	chmod +x $@+ && \
+ 	mv $@+ $@
+ else # NO_PERL
+-$(SCRIPT_PERL_GEN) git-instaweb: % : unimplemented.sh
++$(SCRIPT_PERL_GEN) git-instaweb git-request-pull: % : unimplemented.sh
+ 	$(QUIET_GEN)$(RM) $@ $@+ && \
+ 	sed -e '1s|#!.*/sh|#!$(SHELL_PATH_SQ)|' \
+ 	    -e 's|@@REASON@@|NO_PERL=$(NO_PERL)|g' \
