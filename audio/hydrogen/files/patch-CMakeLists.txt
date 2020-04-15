@@ -1,0 +1,27 @@
+--- CMakeLists.txt.orig	2016-11-05 18:52:50 UTC
++++ CMakeLists.txt
+@@ -111,9 +111,9 @@ IF (NOT CMAKE_CXX_COMPILER_ID MATCHES "C
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-implement-inlines")
+ ENDIF()
+ 
+-SET(CMAKE_CXX_FLAGS_RELEASE "")
++SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
+ 
+-SET(CMAKE_CXX_FLAGS_DEBUG "-g ")#-Winline")
++SET(CMAKE_CXX_FLAGS_DEBUG "-g ${CMAKE_CXX_FLAGS_DEBUG}")#-Winline")
+ 
+ 
+ IF(APPLE)
+@@ -201,7 +201,11 @@ FIND_HELPER(NSMSESSION liblo lo/lo.h lo)
+ IF("${CMAKE_SYSTEM_NAME}" MATCHES "NetBSD")
+ 	FIND_HELPER(OSS oss sys/soundcard.h ossaudio )
+ ELSE()
+-	FIND_HELPER(OSS oss sys/soundcard.h OSSlib )
++    IF("${CMAKE_SYSTEM_NAME}" MATCHES "FreeBSD")
++        FIND_HELPER(OSS oss sys/soundcard.h c )
++    ELSE()
++        FIND_HELPER(OSS oss sys/soundcard.h OSSlib )
++    ENDIF()
+ ENDIF()
+ 
+ FIND_HELPER(JACK jack jack/jack.h jack)
