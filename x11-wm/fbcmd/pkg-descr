@@ -1,0 +1,4 @@
+fbcmd provides some functions to the 'core' of fluxbox
+from the commandline.
+
+WWW: https://darkshed.net/files/c_cpp/fbcmd/
