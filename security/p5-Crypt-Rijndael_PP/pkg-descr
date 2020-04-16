@@ -1,0 +1,5 @@
+This is a pure perl implementation of the new AES Rijndael. You want
+to use Crypt::Rijndael where available. This implementation is really
+slow, but I am working on it.
+
+WWW: https://metacpan.org/release/Crypt-Rijndael_PP

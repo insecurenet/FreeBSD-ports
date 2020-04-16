@@ -1,0 +1,2 @@
+bin/wemux
+@sample etc/wemux.conf.example etc/wemux.conf

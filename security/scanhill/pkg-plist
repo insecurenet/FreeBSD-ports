@@ -1,0 +1,2 @@
+bin/scanhill
+@sample etc/scanhill.conf-dist etc/scanhill.conf

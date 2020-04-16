@@ -1,0 +1,4 @@
+Support all the cryptohash package using conduits from the conduit
+package.
+
+WWW: https://github.com/vincenthz/hs-cryptohash-conduit
