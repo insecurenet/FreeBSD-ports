@@ -1,0 +1,3 @@
+Make Email::Address->parse() loose.
+
+WWW: https://metacpan.org/release/Email-Address-Loose

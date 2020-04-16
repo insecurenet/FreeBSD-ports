@@ -1,0 +1,4 @@
+include/blis/blis.h
+include/blis/cblas.h
+lib/libblis.a
+lib/libblis.so
