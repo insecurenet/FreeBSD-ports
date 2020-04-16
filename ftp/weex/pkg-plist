@@ -1,0 +1,3 @@
+bin/weex
+man/man1/weex.1.gz
+%%EXAMPLESDIR%%/sample.weexrc

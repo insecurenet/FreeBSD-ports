@@ -1,0 +1,63 @@
+--- configure.orig	2018-01-23 18:08:55 UTC
++++ configure
+@@ -21895,12 +21895,13 @@ case "$host_os" in
+ darwin*)
+     ;;
+ *)
+-    for ac_func in clock_gettime
++    for ac_func in clock_gettime clock_nanosleep
+ do :
+-  ac_fn_c_check_func "$LINENO" "clock_gettime" "ac_cv_func_clock_gettime"
+-if test "x$ac_cv_func_clock_gettime" = xyes; then :
++  as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
++ac_fn_c_check_func "$LINENO" "$ac_func" "$as_ac_var"
++if eval test \"x\$"$as_ac_var"\" = x"yes"; then :
+   cat >>confdefs.h <<_ACEOF
+-#define HAVE_CLOCK_GETTIME 1
++#define `$as_echo "HAVE_$ac_func" | $as_tr_cpp` 1
+ _ACEOF
+  CLOCK_LIB=
+ else
+@@ -22559,11 +22559,20 @@ $as_echo "yes" >&6; }
+ fi
+ fi
+ 
+-ac_fn_c_check_header_mongrel "$LINENO" "linux/futex.h" "ac_cv_header_linux_futex_h" "$ac_includes_default"
+-if test "x$ac_cv_header_linux_futex_h" = xyes; then :
+-  DEFINES="$DEFINES -DHAVE_LINUX_FUTEX_H"
++for ac_header in linux/futex.h sys/umtx.h
++do :
++  as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
++ac_fn_c_check_header_compile "$LINENO" "$ac_header" "$as_ac_Header" "#include <errno.h>
++     #include <sys/types.h>
++"
++if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
++  cat >>confdefs.h <<_ACEOF
++#define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
++_ACEOF
++ DEFINES="$DEFINES -DHAVE_LINUX_FUTEX_H"
+ fi
+ 
++done
+ 
+ 
+ # Check whether --enable-selinux was given.
+@@ -23308,7 +23308,7 @@ fi
+ 
+ 
+ case "$host_os" in
+-linux*)
++linux* | freebsd*)
+     dri3_default=yes
+     ;;
+ *)
+@@ -27096,9 +27106,6 @@ rm -f core conftest.err conftest.$ac_obj
+         CLANG_LIBDIR=${LLVM_LIBDIR}
+     fi
+     CLANG_RESOURCE_DIR=$CLANG_LIBDIR/clang/${LLVM_VERSION}
+-    if test ! -f "$CLANG_RESOURCE_DIR/include/stddef.h"; then :
+-  as_fn_error $? "Could not find clang internal header stddef.h in $CLANG_RESOURCE_DIR Use --with-clang-libdir to specify the correct path to the clang libraries." "$LINENO" 5
+-fi
+ fi
+  if test "x$enable_opencl" = xyes; then
+   HAVE_CLOVER_TRUE=
