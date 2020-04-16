@@ -1,0 +1,3 @@
+AnyEvent::Twitter::Stream - Receive Twitter streaming API in an event loop
+
+WWW: https://metacpan.org/release/AnyEvent-Twitter-Stream

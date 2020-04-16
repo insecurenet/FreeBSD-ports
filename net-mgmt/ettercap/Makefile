@@ -1,0 +1,72 @@
+# Created by: George Reid <greid@ukug.uk.freebsd.org>
+# $FreeBSD$
+
+PORTNAME=	ettercap
+PORTVERSION=	0.8.2
+DISTVERSIONPREFIX=	v
+PORTEPOCH=	1
+CATEGORIES=	net-mgmt security
+
+MAINTAINER=	sunpoet@FreeBSD.org
+COMMENT=	Network sniffer/interceptor/injector/logger for switched LANs
+
+LICENSE=	GPLv2
+LICENSE_FILE=	${WRKSRC}/LICENSE
+
+LIB_DEPENDS=	libnet.so:net/libnet
+
+OPTIONS_DEFINE=	DESKTOP DOCS GTK2 IPV6 NCURSES PCRE PLUGINS SSL UTF8
+OPTIONS_DEFAULT=GTK2 NCURSES PCRE PLUGINS SSL UTF8
+OPTIONS_SUB=	yes
+DESKTOP_DESC=	Install ettercap.desktop
+NCURSES_DESC=	Ncurses interface
+PCRE_DESC=	Use PCRE in filters
+SSL_DESC=	SSH1 and SSL decryption support
+
+CMAKE_ARGS=	-DHAVE_PCAP=${LIBDIR} \
+		-DHAVE_RESOLV=${LIBDIR} \
+		-DINSTALL_SYSCONFDIR=${PREFIX}/etc \
+		-DMAN_INSTALLDIR=${PREFIX}/man
+CMAKE_OFF=	BUNDLED_LIBS
+CMAKE_ON=	HAVE_DLOPEN
+LDFLAGS+=	${ICONV_LIB} -lnet -lpcap
+MAKE_JOBS_UNSAFE=	yes
+USE_LDCONFIG=	yes
+USES=		bison cmake:outsource cpe iconv localbase:ldflags pkgconfig
+
+DOCS=		AUTHORS CHANGELOG README README.BINARIES README.BUGS \
+		README.GIT README.PLATFORMS THANKS TODO TODO.TESTING \
+		doc/capture doc/decoders doc/dissectors doc/plugins doc/threads
+
+CPE_VENDOR=	${PORTNAME}_project
+
+GH_ACCOUNT=	Ettercap
+USE_GITHUB=	yes
+
+DESKTOP_CMAKE_BOOL=	INSTALL_DESKTOP
+DESKTOP_USES=		desktop-file-utils
+NCURSES_CMAKE_BOOL=	ENABLE_CURSES
+NCURSES_USES=		ncurses
+GTK2_CMAKE_BOOL=	ENABLE_GTK
+GTK2_USE=		GNOME=gtk20
+GTK2_USES=		gnome
+IPV6_CMAKE_BOOL=	ENABLE_IPV6
+PCRE_CMAKE_BOOL=	HAVE_PCRE
+PCRE_LIB_DEPENDS=	libpcre.so:devel/pcre
+PLUGINS_BUILD_DEPENDS=	curl>=7.26.0:ftp/curl
+PLUGINS_CMAKE_BOOL=	ENABLE_PLUGINS
+PLUGINS_LIB_DEPENDS=	libcurl.so:ftp/curl
+SSL_CMAKE_BOOL=		ENABLE_SSL
+SSL_USES=		ssl
+UTF8_CMAKE_BOOL=	HAVE_UTF8
+UTF8_CMAKE_ON=		-DHAVE_ICONV=${ICONV_PREFIX}
+UTF8_USES=		iconv
+
+post-install:
+	${INSTALL_DATA} ${STAGEDIR}${ETCDIR}/etter.conf ${STAGEDIR}${PREFIX}/etc/etter.conf.sample
+
+post-install-DOCS-on:
+	${MKDIR} ${STAGEDIR}${DOCSDIR}/
+	cd ${WRKSRC}/ && ${INSTALL_DATA} ${DOCS} ${STAGEDIR}${DOCSDIR}/
+
+.include <bsd.port.mk>

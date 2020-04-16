@@ -1,0 +1,20 @@
+--- configure.ac.orig	2018-04-22 08:43:20 UTC
++++ configure.ac
+@@ -15,7 +15,7 @@ AM_PROG_AR
+ AM_PROG_CC_C_O
+ AC_PROG_SED
+ if [ test "$GCC" = "yes" ];then
+-	CFLAGS="$CFLAGS -Wall -Wno-strict-aliasing -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-missing-field-initializers -Wno-implicit-fallthrough -Wno-stringop-truncation"
++	CFLAGS="$CFLAGS -Wall -Wno-strict-aliasing -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-missing-field-initializers -Wno-implicit-fallthrough"
+ fi
+ AC_PATH_PROG(CTAGS, ctags, [:])
+ AC_PATH_PROG(CSCOPE, cscope, [:])
+@@ -168,7 +168,7 @@ if test "$test_for_geoip" = yes;then
+ fi
+ 
+ have_readline=no
+-AC_LIB_HAVE_LINKFLAGS(readline,, [
++AC_LIB_HAVE_LINKFLAGS(readline,ncurses, [
+ #include <stdio.h>
+ #include <readline/readline.h>], [rl_replace_line(0,0);])
+   if test x$ac_cv_libreadline = xyes; then

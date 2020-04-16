@@ -1,0 +1,5 @@
+Client for the OpenStack Glance API. There's a Python API (the glanceclient
+module), and a command-line script (glance). Each implements 100% of the
+OpenStack Glance API.
+
+WWW: https://docs.openstack.org/python-glanceclient/

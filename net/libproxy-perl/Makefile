@@ -1,0 +1,17 @@
+# Created by: Koop Mast <kwm@FreeBSD.org>
+# $FreeBSD$
+
+PORTREVISION=	0
+CATEGORIES=	net lang
+PKGNAMESUFFIX=	-${LIBPROXY_SLAVE}
+
+COMMENT=	Perl binding for libproxy
+
+USES=		perl5
+CMAKE_ON=	PERL_VENDORINSTALL PERL_LINK_LIBPERL
+CMAKE_ARGS=	-DPX_PERL_ARCH=${SITE_ARCH}
+
+LIBPROXY_SLAVE=	perl
+MASTERDIR=	${.CURDIR}/../libproxy
+
+.include "${MASTERDIR}/Makefile"

@@ -1,0 +1,11 @@
+A Zabbix proxy can collect performance and availability data on behalf of the
+Zabbix server. This way, a proxy can take on itself some of the load of
+collecting data and offload the Zabbix server.
+
+Also, using a proxy is the easiest way of implementing centralized and
+distributed monitoring, when all agents and proxies report to one Zabbix server
+and all data is collected centrally.
+
+Zabbix is an enterprise-class open source distributed monitoring solution.
+
+WWW: https://www.zabbix.com/

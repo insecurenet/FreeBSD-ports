@@ -1,0 +1,6 @@
+@mode 4555
+sbin/fping
+sbin/fping6
+@mode
+man/man8/fping.8.gz
+man/man8/fping6.8.gz

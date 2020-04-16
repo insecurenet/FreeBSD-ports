@@ -1,0 +1,5 @@
+pkg/zabbix-proxy.xml
+pkg/zabbix-proxy.inc
+/etc/inc/priv/zabbix-proxy.priv.inc
+%%DATADIR%%/info.xml
+@dir /etc/inc/priv

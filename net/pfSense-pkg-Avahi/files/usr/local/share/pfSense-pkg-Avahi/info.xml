@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<pfsensepkgs>
+	<package>
+		<name>Avahi</name>
+		<pkginfolink>https://forum.netgate.com/topic/134339</pkginfolink>
+		<website>http://www.avahi.org/</website>
+		<descr><![CDATA[Avahi is a system which facilitates host and service discovery in local networks via mDNS (Multicast DNS) and DNS-SD (DNS Service Discovery).]]></descr>
+		<version>%%PKGVERSION%%</version>
+		<configurationfile>avahi.xml</configurationfile>
+	</package>
+</pfsensepkgs>
