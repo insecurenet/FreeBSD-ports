@@ -1,0 +1,14 @@
+===============================================================================
+
+py-fishcrypt has been installed.
+
+To make FiSH work with py-fishcrypt please do symlink as user
+
+    su user
+
+For HexChat
+
+    ln -sf %%DATADIR%%/fishcrypt.py ~/.config/hexchat/addons/
+
+
+===============================================================================
