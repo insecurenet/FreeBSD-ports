@@ -1,0 +1,4 @@
+Sphinx::Config is a Perl module to read, modify and write configuration file of
+Sphinx search engine.
+
+WWW: https://metacpan.org/release/Sphinx-Config
