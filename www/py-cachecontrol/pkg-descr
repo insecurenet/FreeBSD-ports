@@ -1,0 +1,4 @@
+a port of the caching algorithms in httplib2 for use with requests
+session object.
+
+WWW: https://github.com/ionrock/cachecontrol/

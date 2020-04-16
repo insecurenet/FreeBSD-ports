@@ -1,0 +1,12 @@
+%%TOMCAT%%apache-tomcat-8.0/webapps/guacamole.war
+%%ETCDIR%%/guacamole.properties.sample
+%%ETCDIR%%/logback.xml.sample
+%%ETCDIR%%/user-mapping.xml.sample
+%%DATADIR%%/guacamole-auth-duo.tar.gz
+%%DATADIR%%/guacamole-auth-cas.tar.gz
+%%DATADIR%%/guacamole-auth-header.tar.gz
+%%DATADIR%%/guacamole-auth-jdbc.tar.gz
+%%DATADIR%%/guacamole-auth-ldap.tar.gz
+%%DATADIR%%/guacamole-auth-noauth.tar.gz
+%%DATADIR%%/guacamole-auth-openid.tar.gz
+%%DATADIR%%/guacamole.war

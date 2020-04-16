@@ -1,0 +1,3 @@
+Write logs to Firebug or Webkit Inspector.
+
+WWW: https://metacpan.org/release/Plack-Middleware-ConsoleLogger

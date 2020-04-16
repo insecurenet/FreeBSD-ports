@@ -1,0 +1,3 @@
+Store session data in DBI for HTTP::Session.
+
+WWW: https://metacpan.org/release/HTTP-Session-Store-DBI

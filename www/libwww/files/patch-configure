@@ -1,0 +1,15 @@
+--- configure.orig	2018-07-04 23:24:12 UTC
++++ configure
+@@ -16416,8 +16416,11 @@ $as_echo "no" >&6; }
+     if test "x$withval" = "xyes"; then
+       withval=$ssllib
+       SSLINC=$sslinc
++      LIBS="$LIBS $withval"
++    else
++      SSLINC="-I$withval/include/openssl"
++      LIBS="$LIBS -L$withval/lib -lssl -lcrypto"
+     fi
+-    LIBS="$LIBS $withval"
+     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 

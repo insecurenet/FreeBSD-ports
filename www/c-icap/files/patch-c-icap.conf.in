@@ -1,0 +1,11 @@
+--- c-icap.conf.in.orig	2018-09-25 16:30:42 UTC
++++ c-icap.conf.in
+@@ -129,7 +129,7 @@
+ #	The port number that the c-icap server uses to listen to requests.
+ # Default:
+ #	None
+-Port 1344
++Port 127.0.0.1:1344
+ 
+ # TAG: TlsPort
+ # Format: TlsPort [address:]port [tls-method=method] [cert=path_to_pem_cert] [key=path_to_pem_key] [client_ca=path_to_pem_file] [ciphers=ciph1:ciph2...] [tls_options=[!]Opt1|[!]Opt2|...]

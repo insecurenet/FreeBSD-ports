@@ -1,0 +1,3 @@
+Plack middleware for digest authentication.
+
+WWW: https://metacpan.org/release/Plack-Middleware-Auth-Digest

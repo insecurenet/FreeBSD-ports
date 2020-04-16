@@ -1,0 +1,4 @@
+This module is a Perl extension that extends
+REST::Client for use with the CIF-Framework REST interface
+
+WWW: https://metacpan.org/release/SAXJAZMAN/CIF-Client-0.21
