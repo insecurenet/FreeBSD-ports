@@ -109,11 +109,11 @@ _exec() {
 
 	if [ ${_result} -eq 0 -o -n "${_ignore_result}" ]; then
 		[ -n "${_stdout}" -a -n "${_msg}" ] \
-		    && _echo "done."
+		    && _echo "fatto."
 		return 0
 	else
 		[ -n "${_stdout}" -a -n "${_msg}" ] \
-		    && _echo "failed."
+		    && _echo "fallit."
 		[ -n "${_do_not_exit}" ] \
 		    && return 1 \
 		    || _exit 1
@@ -384,7 +384,7 @@ pkg_upgrade_repo() {
 			return
 			;;
 		*)
-			_echo "ERROR: Unable to compare version of ${_repo_pkg}"
+			_echo "ERRORE: Impossibile confrontare la versione di ${_repo_pkg}"
 			_exit 1
 	esac
 
@@ -467,15 +467,15 @@ pkg_upgrade() {
 		fi
 
 		if [ ! -f ${uboot_mntp}/${uboot_bin} ]; then
-			_echo "ERROR: u-boot partition (${uboot_mntp}) is not" \
-			    "properly mounted"
+			_echo "ERRORE: partizione u-boot (${uboot_mntp}) non" \
+			    "montata correttamente"
 			_exit 1
 		fi
 	fi
 
 	if [ -z "${kernel_pkg}" ]; then
-		_echo "ERROR: It was not possible to identify which" \
-		    "${product} kernel is installed"
+		_echo "ERRORE: Non è stato possibile identificare quale" \
+		    "${product} kernel è installato"
 		_exit 1
 	fi
 
@@ -558,11 +558,11 @@ pkg_upgrade() {
 		check_upgrade mute skip_update
 		case "$?" in
 			0)
-				_echo "Your packages are up to date"
+				_echo "I tuoi pacchetti sono aggiornati"
 				_exit 0
 				;;
 			3)
-				_echo "Your system is on a newer version"
+				_echo "Il tuo sistema ha una versione più recente"
 				_exit 0
 				;;
 		esac
@@ -575,12 +575,12 @@ pkg_upgrade() {
 
 		local _meta_pkg=$(get_meta_pkg_name)
 		if [ "${platform}" = "nanobsd" ]; then
-			_echo "**** WARNING ****"
+			_echo "**** ATTENZIONE ****"
 			_echo ""
-			_echo "NanoBSD platform is no longer supported."
+			_echo "La piattaforma NanoBSD non è più supportata."
 			_echo ""
-			_echo "You can find instructions on how to convert it"
-			    "to Full Installation at http://bit.ly/2wDinm8"
+			_echo "Puoi trovare le istruzioni su come convertirla"
+			    "a Installazione FULL at http://bit.ly/2wDinm8"
 			_exit 1
 		fi
 
@@ -599,12 +599,12 @@ pkg_upgrade() {
 			    ignore_result do_not_exit
 
 			_echo ""
-			_echo "**** WARNING ****"
-			_echo "Reboot will be required!!"
-			_echo -n "Proceed with upgrade? (y/N) "
+			_echo "**** ATTENZION ****"
+			_echo "Sarà necessario un riavvio!!"
+			_echo -n "Aggiornare comunque? (s/N) "
 			read answer
-			if [ "${answer}" != "y" ]; then
-				_echo "Aborting..."
+			if [ "${answer}" != "s" ]; then
+				_echo "Interrotto..."
 				_exit 0
 			fi
 		fi
@@ -858,8 +858,8 @@ get_meta_pkg_name() {
 	elif is_pkg_installed ${product}; then
 		echo "${product}"
 	else
-		_echo "ERROR: It was not possible to identify which" \
-		    "${product} meta package is installed"
+		_echo "ERRORE: Non è stato possibile identificare quali" \
+		    "${product} meta pacchetto è installato"
 		_exit 1
 	fi
 }
@@ -885,7 +885,7 @@ check_upgrade() {
 				;;
 			'>')
 				[ -z "${_mute}" ] \
-				    && _echo "Your system is on a newer version"
+				    && _echo "Il tuo sistema ha un versione più recente"
 				return 0
 				;;
 		esac
@@ -893,7 +893,7 @@ check_upgrade() {
 		local _new_version=$(_pkg rquery -U %v ${_package})
 		[ -z "${_mute}" ] \
 		    && _echo \
-		    "${_new_version} version of ${product} is available"
+		    "${_new_version} versione di ${product} è disponibile"
 		return 2
 	done
 
@@ -925,8 +925,8 @@ compare_pkg_version() {
 	local _lver=$(_pkg query %v ${_pkg_name})
 
 	if [ -z "${_lver}" ]; then
-		_echo "ERROR: It was not possible to determine ${_pkg_name}" \
-		    "local version"
+		_echo "ERRORE: Non è possibile determinare ${_pkg_name}" \
+		    "versione locale"
 		_exit 1
 	fi
 
@@ -939,8 +939,8 @@ compare_pkg_version() {
 	fi
 
 	if [ -z "${_rver}" ]; then
-		_echo "ERROR: It was not possible to determine ${_pkg_name}" \
-		    "remote version"
+		_echo "ERRORE: Non è possibile determinare ${_pkg_name}" \
+		    "versione remota"
 		_exit 1
 	fi
 
@@ -974,11 +974,11 @@ pkg_install() {
 
 		if [ -z "${_force}" ]; then
 			if [ "${_cversion}" = "=" ]; then
-				_echo "Package ${_pkg_name} is up to date"
+				_echo "${_pkg_name} è aggiornato"
 				_exit 0
 			elif [ "${_cversion}" = ">" ]; then
-				_echo "Installed ${_pkg_name} version is" \
-				    "newer than remote"
+				_echo "La versione di ${_pkg_name} è" \
+				    "più nuova di quella da remoto"
 				_exit 0
 			fi
 		fi
@@ -998,7 +998,7 @@ pkg_install() {
 pkg_reinstall_all() {
 	for _package in $(_pkg query -e '%a == 0' %n); do
 		case ${_package} in "${pkg_prefix}"* )
-			_echo "Reinstalling ${_package}"
+			_echo "Reinstallazione ${_package}"
 			pkg_install ${_package} 1
 			;;
 		esac
@@ -1009,12 +1009,12 @@ pkg_delete() {
 	local _pkg_name="${1}"
 
 	if [ -z "${_pkg_name}" ]; then
-		_echo "ERROR: Blank package name"
+		_echo "ERRORE: Nome del pacchetto vuoto"
 		_exit 1
 	fi
 
 	if ! is_pkg_installed ${_pkg_name}; then
-		_echo "ERROR: Package ${_pkg_name} is not installed"
+		_echo "ERRORE: Il pacchetto ${_pkg_name} non è installato"
 		_exit 1
 	fi
 
@@ -1028,7 +1028,7 @@ pkg_delete() {
 pkg_delete_all() {
 	for _package in $(pkg-static query -e '%a == 0' %n); do
 		case ${_package} in "${pkg_prefix}"* )
-			_echo "Removing ${_package}"
+			_echo "Rimozione ${_package}"
 			pkg_delete ${_package}
 			;;
 		esac
@@ -1046,8 +1046,8 @@ do_reboot() {
 	fi
 
 	if [ -z "${dont_reboot}" ]; then
-		_echo "Upgrade is complete.  Rebooting ${_msg}"
-		echo "Upgrade is complete.  Rebooting ${_msg}" | wall
+		_echo "Aggiornamento completato.  Riavvio ${_msg}"
+		echo "Aggiornamento completato.  Riavvio  ${_msg}" | wall
 		/etc/rc.notify_message -e -g -m \
 		    "Upgrade is complete.  Rebooting ${_msg}" >/dev/null 2>&1
 		if [ "${_now}" = "now" ]; then
@@ -1057,8 +1057,8 @@ do_reboot() {
 			    && /etc/rc.reboot ${reboot_params}) &
 		fi
 	else
-		_echo "Upgrade is complete."
-		echo "Upgrade is complete." | wall
+		_echo "Aggiornamento completato."
+		echo "Aggiornamento completato." | wall
 		/etc/rc.notify_message -e -g -m "Upgrade is complete." \
 		    >/dev/null 2>&1
 	fi
@@ -1285,7 +1285,7 @@ fi
 : ${action:="upgrade"}
 
 if pgrep -qF ${pid_file} >/dev/null 2>&1; then
-	echo "Another instance is already running... Aborting!"
+	echo "Un'altra istanza è in corso... Interrompere!"
 	exit 1
 fi
 
@@ -1300,7 +1300,7 @@ block_external_services=$(read_xml_tag.sh boolean \
     system/block_external_services)
 
 if [ "${block_external_services}" = "true" ]; then
-	echo "Aborted due to block_external_services flag"
+	echo "Interrotto a causa del flag block_external_services"
 	exit 0
 fi
 
@@ -1341,18 +1341,18 @@ if [ "${action}" = "install" ]; then
 	new_php_pkg=$(_pkg rquery -U %o | grep -s "^${cur_php_pkg}\$")
 
 	if [ "${cur_php_pkg}" != "${new_php_pkg}" ]; then
-		_echo "WARNING: Current pkg repository has a new PHP major"
-		_echo "         version. ${product} should be upgraded before"
-		_echo "         installing any new package."
+		_echo "ATTENZIONE: L'attuale repository pkg ha una nuova versione di PHP"
+		_echo "            ${product} dovrebbe essere aggiornato prima di"
+		_echo "            installare qualsiasi nuovo pacchetto."
 		_exit 1
 	fi
 fi
 
 if [ -n "${NEW_MAJOR}" -a "${action}" = "install" ]; then
-	_echo "WARNING: Current pkg repository has a new OS major version."
-	_echo "         ${product} should be upgraded before doing any other"
-	_echo "         operation"
-	_exit 1
+		_echo "ATTENZIONE: L'attuale repository pkg ha una nuova versione di OS"
+		_echo "            ${product} dovrebbe essere aggiornato prima di"
+		_echo "            fare qualsiasi nuova operazione."
+		_exit 1
 fi
 
 case "${action}" in
@@ -1381,7 +1381,7 @@ case "${action}" in
 		fi
 		;;
 	*)
-		_echo "ERROR: Invalid action!"
+		_echo "ERRORE: Azione non valida!"
 		_exit 1
 esac
 
